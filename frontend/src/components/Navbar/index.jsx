@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Navbar(props){
     const {highlighted,highlightedHandler}=props
+    const navigate=useNavigate()
     const[isHover,isHoverSet]=useState({home:false,search:false})
     const hoverHandel=(event,action,name)=>{
         if(action==='Enter'){
@@ -15,7 +17,7 @@ function Navbar(props){
             style={{color:(highlighted==='home'||isHover.home)? "white":"grey"}} 
             onMouseEnter={(event)=>{hoverHandel(event,"Enter","home")}} 
             onMouseLeave={(event)=>{hoverHandel(event,"Leave","home")}}
-            onClick={()=>{highlightedHandler("home")}}>
+            onClick={()=>{highlightedHandler("home");navigate('/home')}}>
             <i class="fa-solid fa-house"></i>
             <span className="text-center leading-6">&nbsp;Home</span> 
         </div>
@@ -23,7 +25,7 @@ function Navbar(props){
             style={{color:(highlighted==='search'||isHover.search)? "white":"grey"}} 
             onMouseEnter={(event)=>{hoverHandel(event,"Enter","search")}} 
             onMouseLeave={(event)=>{hoverHandel(event,"Leave","search")}}
-            onClick={()=>{highlightedHandler("search")}}>
+            onClick={()=>{highlightedHandler("search");navigate("search")}}>
             <i class="fa-solid fa-magnifying-glass"></i>
             <span className="text-center leading-6">&nbsp;Search</span>
         </div>
