@@ -11,7 +11,7 @@ function Sidebar(props){
             isHoverSet(prev=>({...prev,[name]:false}))
         }
     }
-    return(<div className="Navbar p-5 flex flex-col text-white backgroundColorClass rounded-xl text-2xl self-stretch w-full h-full overflow-y-auto overflow-x-hidden">
+    return(<div className="Navbar p-5 flex flex-col text-white backgroundColorClass rounded-xl text-2xl self-stretch w-full h-full overflow-y-auto overflow-x-hidden hidden sm:block">
         <div className="w-fit cursor-pointer flex" 
         onClick={()=>{highlightedHandler("library")}} 
         style={{color:(highlighted==='library'||isHover.library)?"white":"grey"}}

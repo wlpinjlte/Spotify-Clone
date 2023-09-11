@@ -10,7 +10,7 @@ function Navbar(props){
             isHoverSet(prev=>({...prev,[name]:false}))
         }
     }
-    return(<div className="Navbar p-5 flex flex-col text-white backgroundColorClass rounded-xl text-2xl mb-2 w-full">
+    return(<div className="Navbar p-5 flex flex-col text-white backgroundColorClass rounded-xl text-2xl mb-2 w-full hidden sm:block">
         <div className="flex cursor-pointer" 
             style={{color:(highlighted==='home'||isHover.home)? "white":"grey"}} 
             onMouseEnter={(event)=>{hoverHandel(event,"Enter","home")}} 

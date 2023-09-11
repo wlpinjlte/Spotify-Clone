@@ -103,7 +103,9 @@ input[type="range"] {
   animation-name: ClickAnimationOut;
   animation-duration: 0.2s;
 }
-
+.wmd{
+  width: 30%;
+}
 @keyframes buttonIn {
   0%   {opacity: 0.1;}
   100% {opacity: 1;}

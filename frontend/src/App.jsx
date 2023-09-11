@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="App flex p-2 flex-col">
       <div className='flex overflow-auto h-full'>
-        <div className='flex flex-col mr-2'>
+        <div className='flex flex-col sm:mr-2'>
           <Navbar highlighted={highlighted} highlightedHandler={highlightedHandler}/>
           <Sidebar highlighted={highlighted} highlightedHandler={highlightedHandler}/>
         </div>
