@@ -2,7 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Navbar(props){
-    const {highlighted,highlightedHandler}=props
+    const [highlighted,highlightedSet]=useState("home")
+    const highlightedHandler=(name)=>{
+        highlightedSet(prev=>name)
+    }
     const navigate=useNavigate()
     const[isHover,isHoverSet]=useState({home:false,search:false})
     const hoverHandel=(event,action,name)=>{
