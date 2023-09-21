@@ -11,7 +11,6 @@ import RegisterForm from './components/RegisterForm';
 import AddContentForm from './components/AddContentForm';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import SongsProviader from './providers/SongsProvider';
-
 function App() {
   const [isRegisterForm,isRegisterFormSet]=useState(false)
   const [isAddContentForm,isAddContentFormSet]=useState(false)

@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import SmallSongSquare from "../SmallSongSquare"
-
+import { SongsContext } from "../../providers/SongsProvider"
 function Sidebar(props){
+    const {songList}=useContext(SongsContext)
     const {openHandler}=props
     const[isHover,isHoverSet]=useState(false)
     const hoverHandel=(action)=>{
@@ -16,13 +17,13 @@ function Sidebar(props){
             <i className="fa-solid fa-align-justify fa-rotate-90"></i>
             <span>&nbsp;Library</span>
             <span className="w-24 h-1 block"></span>
-            <i class="fa-solid fa-plus" 
+            <i className="fa-solid fa-plus" 
             style={{lineHeight:"2.1rem",color:isHover?"white":"grey"}}
             onMouseEnter={(event)=>{hoverHandel("Enter")}}
             onMouseLeave={(event)=>{hoverHandel("Leave")}}
             onClick={()=>openHandler(true)}></i>
         </div>
-        {new Array(20).fill(0).map(()=>(<SmallSongSquare/>))}
+        {songList.map((song)=>(<SmallSongSquare key={song.id} {...song}/>))}
     </div>)
 }
 

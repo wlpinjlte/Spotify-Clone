@@ -1,6 +1,9 @@
-import { useState } from "react";
-
+import { useContext, useState } from "react";
+import { URL } from "../../helpers/SongApi";
+import { SongsContext } from "../../providers/SongsProvider";
 function SmallSongSquare(props){
+    const {setSong}=useContext(SongsContext)
+    const {title,id,author,image}=props
     const [isHover,isHoverSet]=useState(false)
     const hoverHandler=(action)=>{
         // console.log(isHover)
@@ -10,12 +13,15 @@ function SmallSongSquare(props){
             isHoverSet(prev=>false)
         }
     }
-    return(<div className={`w-full mt-2 flex p-2 rounded-md cursor-pointer `.concat(isHover?"lightGreyBackground":"")} onMouseEnter={()=>hoverHandler("Enter")} onMouseLeave={()=>hoverHandler("Leave")}>
-        <img className="w-14 h-14 rounded-md" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyh_rKHjeMf86ZiodZ0OuVNFFVSn1Av9kGvw&usqp=CAU"></img>
+    return(<div className={`w-full mt-2 flex p-2 rounded-md cursor-pointer `.concat(isHover?"lightGreyBackground":"")} 
+    onMouseEnter={()=>hoverHandler("Enter")} 
+    onMouseLeave={()=>hoverHandler("Leave")}
+    onClick={()=>{setSong(id)}}>
+        <img className="w-14 h-14 rounded-md" src={`${URL}${image}`}></img>
         <span className="w-4 h-1 block"></span>
         <div className="flex flex-col">
-            <h1 className="text-xl">Name</h1>
-            <span className="text-base authorColor">by author</span>
+            <h1 className="text-xl">{title}</h1>
+            <span className="text-base authorColor">by {author}</span>
         </div>
     </div>)
 }

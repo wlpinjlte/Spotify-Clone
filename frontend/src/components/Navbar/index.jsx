@@ -21,7 +21,7 @@ function Navbar(props){
             onMouseEnter={(event)=>{hoverHandel(event,"Enter","home")}} 
             onMouseLeave={(event)=>{hoverHandel(event,"Leave","home")}}
             onClick={()=>{highlightedHandler("home");navigate('/home')}}>
-            <i class="fa-solid fa-house"></i>
+            <i className="fa-solid fa-house"></i>
             <span className="text-center leading-6">&nbsp;Home</span> 
         </div>
         <div className="flex mt-3 cursor-pointer" 
@@ -29,7 +29,7 @@ function Navbar(props){
             onMouseEnter={(event)=>{hoverHandel(event,"Enter","search")}} 
             onMouseLeave={(event)=>{hoverHandel(event,"Leave","search")}}
             onClick={()=>{highlightedHandler("search");navigate("search")}}>
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <i className="fa-solid fa-magnifying-glass"></i>
             <span className="text-center leading-6">&nbsp;Search</span>
         </div>
     </div>)
