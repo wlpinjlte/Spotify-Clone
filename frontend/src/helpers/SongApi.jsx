@@ -9,3 +9,9 @@ export const getAll=()=>{
 export const getOne=(id)=>{
     return axios.get(`${URL}/songs/${id}`)
 }
+
+export const getByTitle=(title)=>{
+    return axios.post(`${URL}/songs/search`,{
+        title:title
+    })
+}

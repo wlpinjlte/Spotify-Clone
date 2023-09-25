@@ -1,6 +1,7 @@
 from django.db import models
 from .validators import audioValidator
 from mutagen.mp3 import MP3
+from django.contrib.auth.models import User
 # Create your models here.
 class Song(models.Model):
     title=models.CharField(max_length=200)
@@ -15,6 +16,16 @@ class Song(models.Model):
     def save(self,*args, **kwargs):
         self.timeLength=f'{MP3(self.audioFile).info.length:.2f}'
         return super().save(*args,**kwargs)
+
+    class META:
+        ordering="id"
+
+class Users(models.Model):
+    user=models.OneToOneField(to=User,on_delete=models.CASCADE)
+    likedSongs=models.ManyToManyField(to=Song)
+
+    def __str__(self):
+        return self.user.username
 
     class META:
         ordering="id"

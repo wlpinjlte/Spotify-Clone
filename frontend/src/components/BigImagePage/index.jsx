@@ -2,7 +2,7 @@ import SongRectangle from "../SongRectangle";
 function BigImagePage(){
     return(<div className="flex flex-col overflow-auto">
         <div className="flex mt-16 items-center">
-            <i class="fa-solid fa-heart p-12 md:p-14 md:text-3xl xl:p-16 gradientLikeButton text-2xl xl:text-6xl leading-none"></i>
+            <i className="fa-solid fa-heart p-12 md:p-14 md:text-3xl xl:p-16 gradientLikeButton text-2xl xl:text-6xl leading-none"></i>
             <div className="flex flex-col h-fit ml-5 font-medium">
                 <h1 className="m-0">
                     Playlist
