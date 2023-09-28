@@ -1,7 +1,7 @@
 import Header from "../Header";
 import LikedSongsButton from "../LikedSongsButton";
 import SingleSongSquare from "../SingleSongSquare";
-import { SongsContext } from "../../providers/SongsProvider";
+import SongsContext from "../../context/SongContext";
 import { useContext } from "react";
 function SongList(){
     const {songList}=useContext(SongsContext)

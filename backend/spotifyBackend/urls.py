@@ -24,18 +24,20 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
     TokenVerifyView,
 )
-
+# from  import
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('songs/',views.songList),
     path('songs/<int:id>',views.singleSong),
     path('songs/search',views.searchSongs),
+    path('songs/addSong/',views.addSong),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
-    path('api/likedSongs/<int:id>',views.getLikedSongs),
+    path('api/likedSongs/',views.getLikedSongs),
     path('api/addToLikedSongs/',views.addToLikedSongs),
     path('api/deleteFromLikedSongs/',views.deleteFromLikedSongs),
+    path('api/register/',views.RegisterView.as_view(),name='auth_register')
 ]
 
 urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

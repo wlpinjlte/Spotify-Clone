@@ -104,6 +104,12 @@ input[type="range"] {
   animation-duration: 0.2s;
 }
 
+.LoadingAnimation{
+  animation-name: LoadingAnimation;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
 @keyframes buttonIn {
   0%   {opacity: 0.1;}
   100% {opacity: 1;}
@@ -116,4 +122,9 @@ input[type="range"] {
 @keyframes ClickAnimationOut {
   20% {transform: scale(0.8);}
   100%{transform: scale(1);}
+}
+
+@keyframes LoadingAnimation{
+  50% {transform: scale(2);}
+  100% {transform: scale(1);}
 }

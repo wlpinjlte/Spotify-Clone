@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useContext } from "react";
-import { SongsContext } from "../../providers/SongsProvider";
-import { URL } from "../../helpers/SongApi";
+import SongsContext from "../../context/SongContext";
+import { URL } from "../../helpers/utils";
 function SingleSongSquare(props){
     const {title,author,image,id}=props
     const [isHover,isHoverSet]=useState(false)

@@ -21,7 +21,7 @@ function SearchPage(){
             onChange={(event)=>titleSet(event.target.value)}
         />
         <div className="flex flex-col">
-            {songList.map((song)=>(<SongRectangle {...song}/>))}
+            {songList.map((song)=>(<SongRectangle key={song.id} {...song}/>))}
         </div>
     </div>)
 }

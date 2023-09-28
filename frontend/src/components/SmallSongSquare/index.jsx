@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
-import { URL } from "../../helpers/SongApi";
-import { SongsContext } from "../../providers/SongsProvider";
+// import { URL } from "../../helpers/SongApi";
+import { URL } from "../../helpers/utils";
+import SongsContext from "../../context/SongContext";
 function SmallSongSquare(props){
     const {setSong}=useContext(SongsContext)
     const {title,id,author,image}=props

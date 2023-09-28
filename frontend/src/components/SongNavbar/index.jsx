@@ -1,20 +1,27 @@
 import { useState,useContext, useEffect } from "react";
-import { SongsContext } from "../../providers/SongsProvider";
-import { URL } from "../../helpers/SongApi";
+import SongsContext from "../../context/SongContext";
+import UserContext from "../../context/UserContext";
+import { URL } from "../../helpers/utils";
 function SongNavbar(){
-    const {nextSong,previousSong,changeVolume,pauseMusic,playMusic,currentSongDetails}=useContext(SongsContext)
+    const {likedSongsList,authToken}=useContext(UserContext)
+    const {nextSong,previousSong,changeVolume,pauseMusic,playMusic,currentSongDetails,unLikeSongHandler,likeSongHandler}=useContext(SongsContext)
     const [isLiked,isLikedSet]=useState(false)
     const [volume,volumeSet]=useState(50)
     const [isPlaying,isPlayingSet]=useState(true)
     const [lastVolume,lastVolumeSet]=useState(50)
+    useEffect(()=>{
+        if(likedSongsList){
+            isLikedSet(likedSongsList.some(song=>song.id===currentSongDetails?.id)?true:false)
+        }
+    },[likedSongsList,currentSongDetails])
     useEffect(()=>{
         if(currentSongDetails){
             isPlayingSet(true)
         }
     },[currentSongDetails])
     const inputHandler=(event)=>{
-        volumeSet(prev=>(event.target.value))
-        changeVolume(volume)
+        volumeSet(event.target.value)
+        changeVolume(event.target.value)
     }
     const isPlayingHandler=()=>{
         if(isPlaying){
@@ -44,7 +51,10 @@ function SongNavbar(){
                 <span className="text-base authorColor">by {currentSongDetails.author}</span>
             </div>
             <span className="w-4 h-1 block"></span>
-            <i className={`fa-heart text-2xl hidden md:block `.concat(isLiked?"fa-solid":"fa-regular")} style={{lineHeight:"3.5rem"}} onClick={()=>{isLikedSet(prev=>(!prev))}}></i>
+            {authToken&&<i className={`fa-heart text-2xl hidden md:block `.concat(isLiked?"fa-solid":"fa-regular")} 
+                style={{lineHeight:"3.5rem"}} 
+                onClick={isLiked?()=>{unLikeSongHandler(currentSongDetails.id)}:()=>{likeSongHandler(currentSongDetails.id)}}>
+            </i>}
         </div>
         <div className="flex w-1/3 justify-center text-4xl items-center" >
             <i className="fa-solid fa-backward-step hover:text-neutral-400" onClick={()=>{previousSong()}}></i>

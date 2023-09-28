@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const URL='http://127.0.0.1:8000'
+import { URL } from "./utils"
 
 export const getAll=()=>{
     return axios.get(`${URL}/songs/`)
@@ -14,4 +14,32 @@ export const getByTitle=(title)=>{
     return axios.post(`${URL}/songs/search`,{
         title:title
     })
+}
+
+export const getLikedSongs=(authToken)=>{
+    return axios.get(`${URL}/api/likedSongs/`,{
+        headers:{
+            Authorization:'Bearer '+String(authToken.access)
+        }
+    })
+}
+
+export const likeSong=(id,authToken)=>{
+    return axios.post(`${URL}/api/addToLikedSongs/`,{songId:id},{
+        headers:{
+            Authorization:'Bearer '+String(authToken.access)
+        }
+    })
+}
+
+export const unLikeSong=(id,authToken)=>{
+    return axios.post(`${URL}/api/deleteFromLikedSongs/`,{songId:id},{
+        headers:{
+            Authorization:'Bearer '+String(authToken.access)
+        }
+    })
+}
+
+export const addSong=(data)=>{
+    return axios.post(`${URL}/songs/addSong/`,data)
 }

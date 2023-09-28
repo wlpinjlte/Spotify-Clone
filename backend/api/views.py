@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,permission_classes
 from rest_framework.response import Response
-
-
-
+from rest_framework import generics
+from django.contrib.auth.models import User
+from rest_framework.permissions import AllowAny,IsAuthenticated
 from .models import Song,Users
-from .serializers import SongSerializer
+from .serializers import SongSerializer,RegisterSerializer
 # Create your views here.
 
 @api_view(["GET"])
@@ -53,9 +53,10 @@ def searchSongs(request):
     return JsonResponse(serializer.data,safe=False)
 
 @api_view(['GET'])
-def getLikedSongs(request,id):
+@permission_classes([IsAuthenticated])
+def getLikedSongs(request):
     try:
-        user = Users.objects.get(pk=id)
+        user=Users.objects.get(user=request.user)
     except Users.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     likedSongs=user.likedSongs.all()
@@ -63,27 +64,35 @@ def getLikedSongs(request,id):
     return Response(serializer.data,status=status.HTTP_200_OK)
 
 @api_view(["POST"])
+@permission_classes([IsAuthenticated])
 def addToLikedSongs(request):
     data=request.data
     try:
-        user=Users.objects.get(pk=data['userId'])
+        user=Users.objects.get(user=request.user)
         song=Song.objects.get(pk=data['songId'])
     except Users.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     except Song.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     user.likedSongs.add(song)
-    return Response({"message":"added succesfully"},status=status.HTTP_204_NO_CONTENT)
+    return Response({"message":"added succesfully"},status=status.HTTP_200_OK)
 
 @api_view(["POST"])
+@permission_classes([IsAuthenticated])
 def deleteFromLikedSongs(request):
     data=request.data
     try:
-        user=Users.objects.get(pk=data['userId'])
+        user=Users.objects.get(user=request.user)
         song=Song.objects.get(pk=data['songId'])
     except Users.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     except Song.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     user.likedSongs.remove(song)
-    return Response({"message":"delete succesfully"},status=status.HTTP_204_NO_CONTENT)
+    return Response({"message":"delete succesfully"},status=status.HTTP_200_OK)
+
+class RegisterView(generics.CreateAPIView):
+    ori_user_set = User.objects.all()
+    my_user_set = Users.objects.all()
+    permission_classes = (AllowAny,)
+    serializer_class = RegisterSerializer
