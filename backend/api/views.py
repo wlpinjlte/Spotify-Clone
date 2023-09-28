@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view,permission_classes
 from rest_framework.response import Response
 from rest_framework import generics
 from django.contrib.auth.models import User
-from rest_framework.permissions import AllowAny,IsAuthenticated
+from rest_framework.permissions import AllowAny,IsAuthenticated,IsAdminUser
 from .models import Song,Users
 from .serializers import SongSerializer,RegisterSerializer
 # Create your views here.
@@ -38,6 +38,7 @@ def singleSong(request,id):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(["POST"])
+@permission_classes([IsAdminUser])
 def addSong(request):
     serializer=SongSerializer(data=request.data)
     if serializer.is_valid():

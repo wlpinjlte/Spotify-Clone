@@ -129,7 +129,8 @@ export function SongsProviader(props){
             nextSong:nextSong,
             unLikeSongHandler:unLikeSongHandler,
             likeSongHandler:likeSongHandler,
-            setSongFromLikedSongsPage:setSongFromLikedSongsPage}}>
+            setSongFromLikedSongsPage:setSongFromLikedSongsPage,
+            songListSet:songListSet}}>
         {isLoading?<LoadingPage/>:props.children}
     </SongsContext.Provider>)
 }

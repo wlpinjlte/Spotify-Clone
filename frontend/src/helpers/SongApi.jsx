@@ -40,6 +40,11 @@ export const unLikeSong=(id,authToken)=>{
     })
 }
 
-export const addSong=(data)=>{
-    return axios.post(`${URL}/songs/addSong/`,data)
+export const addSong=(data,authToken)=>{
+    return axios.post(`${URL}/songs/addSong/`,data,{
+        headers:{
+            Authorization:'Bearer '+String(authToken.access),
+            "Content-Type": "multipart/form-data"
+        }
+    })
 }
